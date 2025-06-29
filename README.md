@@ -1,4 +1,4 @@
-# CubeLedger - Bookkeeping Application
+# CubeLedger - Transaction Wallet Application [![Build and Test](https://github.com/bjfr/cubeledger/actions/workflows/build.yml/badge.svg)](https://github.com/bjfr/cubeledger/actions/workflows/build.yml)
 
 CubeLedger is a simple bookkeeping (accounting) application that keeps track of funds, similar to a wallet in online gaming terminology. It provides a REST API for managing accounts and transactions.
 
@@ -108,12 +108,6 @@ The GitHub Actions workflow configuration is located in `.github/workflows/build
 4. **No Rate Limiting**: The application doesn't include rate limiting to prevent abuse.
 
    **Proper Solution**: Implement rate limiting using a library like Bucket4j or a gateway solution like Spring Cloud Gateway.
-
-5. ~~**No API Documentation**: The application doesn't include API documentation.~~
-
-   ~~**Proper Solution**: Add Swagger/OpenAPI documentation to make the API more discoverable and easier to use.~~
-
-   **IMPLEMENTED**: The application now includes OpenAPI 3.0 documentation. The API documentation is available at `/swagger-ui.html` and the OpenAPI specification at `/api-docs`.
 
 6. **Limited Testing**: The application doesn't include comprehensive tests.
 
