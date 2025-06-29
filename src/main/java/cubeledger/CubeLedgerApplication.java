@@ -22,24 +22,10 @@ public class CubeLedgerApplication {
 		SpringApplication.run(CubeLedgerApplication.class, args);
 	}
 
-//	@Bean
-////	@Profile("!prod")
-//	public GroupedOpenApi actuatorApi(OpenApiCustomizer actuatorOpenApiCustomizer,
-//																		OperationCustomizer actuatorCustomizer,
-//																		WebEndpointProperties endpointProperties) {
-//		return GroupedOpenApi.builder()
-//				.group("Actuator")
-//				.pathsToMatch(endpointProperties.getBasePath() + ALL_PATTERN)
-//				.addOpenApiCustomizer(actuatorOpenApiCustomizer)
-//				.addOpenApiCustomizer(openApi -> openApi.info(new Info().title("Actuator API").version("1.0")))
-//				.addOperationCustomizer(actuatorCustomizer)
-//				.pathsToExclude("/health/*")
-//				.build();
-//	}
-
 	@Bean
-	public GroupedOpenApi usersGroup() {
-		return GroupedOpenApi.builder().group("api")
+	public GroupedOpenApi apiGroup() {
+		return GroupedOpenApi.builder()
+				.group("api")
 				.addOperationCustomizer((operation, handlerMethod) -> {
 					operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 					return operation;

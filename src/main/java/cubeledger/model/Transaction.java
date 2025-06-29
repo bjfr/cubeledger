@@ -1,5 +1,7 @@
 package cubeledger.model;
 
+import static jakarta.persistence.FetchType.EAGER;
+
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,11 +19,11 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "source_account_id")
     private Account sourceAccount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "target_account_id")
     private Account targetAccount;
 

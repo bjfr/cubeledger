@@ -5,6 +5,7 @@
 package cubeledger.model;
 
 public enum Currency {
+    SEK("SEK", "kr", "Swedish Krona"),
     USD("USD", "$", "US Dollar"),
     EUR("EUR", "€", "Euro"),
     GBP("GBP", "£", "British Pound"),
@@ -12,8 +13,7 @@ public enum Currency {
     CAD("CAD", "C$", "Canadian Dollar"),
     AUD("AUD", "A$", "Australian Dollar"),
     CHF("CHF", "Fr", "Swiss Franc"),
-    CNY("CNY", "¥", "Chinese Yuan"),
-    SEK("SEK", "kr", "Swedish Krona");
+    CNY("CNY", "¥", "Chinese Yuan");
 
     private final String code;
     private final String symbol;
