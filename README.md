@@ -17,6 +17,7 @@ CubeLedger is a simple bookkeeping (accounting) application that keeps track of 
 - Spring Data JPA
 - Flyway (database migration)
 - OpenAPI 3.0 (API documentation)
+- Spring Boot Actuator (monitoring and management)
 - H2 Database (for development)
 - PostgreSQL (for production)
 
@@ -77,6 +78,32 @@ The application uses OpenAPI 3.0 (formerly known as Swagger) for API documentati
 4. **Detailed Information**: Each endpoint is documented with descriptions, request/response schemas, and possible response codes.
 5. **Customization**: The OpenAPI configuration is customized in the `OpenApiConfig` class and `application.properties`.
 
+### Application Monitoring with Spring Boot Actuator
+
+The application uses Spring Boot Actuator for monitoring and managing the application in production:
+
+1. **Health Checks**: The `/actuator/health` endpoint provides basic health information about the application, including custom health indicators for the database.
+2. **Metrics**: The `/actuator/metrics` endpoint provides metrics about the application, including custom metrics for transaction operations.
+3. **Info**: The `/actuator/info` endpoint provides general information about the application, such as name, description, and version.
+4. **Environment**: The `/actuator/env` endpoint provides information about the application's environment properties.
+5. **Beans**: The `/actuator/beans` endpoint provides information about all the Spring beans in the application.
+6. **Mappings**: The `/actuator/mappings` endpoint provides information about all the request mappings in the application.
+7. **Loggers**: The `/actuator/loggers` endpoint provides information about the application's loggers and allows changing log levels at runtime.
+
+#### Custom Health Indicators
+
+The application includes a custom health indicator that checks if the database is accessible by counting the number of accounts.
+
+#### Custom Metrics
+
+The application includes custom metrics for tracking transaction operations:
+
+1. **Deposit Counter**: Tracks the number of deposit transactions processed.
+2. **Withdrawal Counter**: Tracks the number of withdrawal transactions processed.
+3. **Transfer Counter**: Tracks the number of transfer transactions processed.
+
+These metrics are available at `/actuator/metrics/cubeledger.transactions.deposit`, `/actuator/metrics/cubeledger.transactions.withdrawal`, and `/actuator/metrics/cubeledger.transactions.transfer` respectively.
+
 ### Continuous Integration
 
 The application uses GitHub Actions for continuous integration:
@@ -109,6 +136,10 @@ The GitHub Actions workflow configuration is located in `.github/workflows/build
 
    **Proper Solution**: Implement rate limiting using a library like Bucket4j or a gateway solution like Spring Cloud Gateway.
 
+5. **Monitoring and Observability**: The application includes basic monitoring and observability through Spring Boot Actuator.
+
+   **IMPLEMENTED**: The application uses Spring Boot Actuator for monitoring and management, including health checks, metrics, and custom indicators. This provides basic observability for the application in production.
+
 6. **Limited Testing**: The application doesn't include comprehensive tests.
 
    **Proper Solution**: Implement unit tests, integration tests, and end-to-end tests to ensure the application works as expected.
@@ -128,6 +159,7 @@ The GitHub Actions workflow configuration is located in `.github/workflows/build
 4. The application will be available at `http://localhost:8080`
 5. Access the API documentation at `http://localhost:8080/swagger-ui.html`
 6. The OpenAPI specification is available at `http://localhost:8080/api-docs`
+7. Access the Actuator endpoints at `http://localhost:8080/actuator`
 
 ### API Examples
 

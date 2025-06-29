@@ -71,6 +71,7 @@ public class TransactionController {
                 request.getSourceAccountNumber(),
                 request.getTargetAccountNumber(),
                 request.getAmount(),
+                request.getCurrency(),
                 request.getDescription()
         );
         return ResponseEntity.ok(convertToDTO(transaction));
@@ -110,6 +111,7 @@ public class TransactionController {
         Transaction transaction = accountService.deposit(
                 request.getAccountNumber(),
                 request.getAmount(),
+                request.getCurrency(),
                 request.getDescription()
         );
         return ResponseEntity.ok(convertToDTO(transaction));
@@ -149,6 +151,7 @@ public class TransactionController {
         Transaction transaction = accountService.withdraw(
                 request.getAccountNumber(),
                 request.getAmount(),
+                request.getCurrency(),
                 request.getDescription()
         );
         return ResponseEntity.ok(convertToDTO(transaction));
@@ -233,6 +236,7 @@ public class TransactionController {
                 transaction.getSourceAccount() != null ? transaction.getSourceAccount().getAccountNumber() : null,
                 transaction.getTargetAccount() != null ? transaction.getTargetAccount().getAccountNumber() : null,
                 transaction.getAmount(),
+                transaction.getCurrency(),
                 transaction.getTimestamp(),
                 transaction.getDescription(),
                 transaction.getType()

@@ -1,5 +1,6 @@
 package cubeledger.dto;
 
+import cubeledger.model.Currency;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +22,8 @@ public class TransferRequest {
     @DecimalMin(value = "0.01", message = "Amount must be greater than zero")
     private BigDecimal amount;
 
+    private Currency currency = Currency.USD; // Default to USD if not specified
+
     private String description;
 
     // Default constructor
@@ -28,11 +31,17 @@ public class TransferRequest {
     }
 
     // Constructor with all fields
-    public TransferRequest(String sourceAccountNumber, String targetAccountNumber, BigDecimal amount, String description) {
+    public TransferRequest(String sourceAccountNumber, String targetAccountNumber, BigDecimal amount, Currency currency, String description) {
         this.sourceAccountNumber = sourceAccountNumber;
         this.targetAccountNumber = targetAccountNumber;
         this.amount = amount;
+        this.currency = currency;
         this.description = description;
+    }
+
+    // Constructor without currency (for backward compatibility)
+    public TransferRequest(String sourceAccountNumber, String targetAccountNumber, BigDecimal amount, String description) {
+        this(sourceAccountNumber, targetAccountNumber, amount, Currency.USD, description);
     }
 
     // Getters and setters
@@ -58,6 +67,14 @@ public class TransferRequest {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     public String getDescription() {

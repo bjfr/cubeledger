@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Entity representing an account in the ledger system.
- * Each account has a unique identifier, a balance, and creation/update timestamps.
+ * Each account has a unique identifier, a balance, currency, and creation/update timestamps.
  */
 @Entity
 @Table(name = "accounts")
@@ -23,6 +23,10 @@ public class Account {
     @Column(nullable = false)
     private BigDecimal balance;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 3)
+    private Currency currency;
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
@@ -35,6 +39,7 @@ public class Account {
     // Default constructor required by JPA
     public Account() {
         this.balance = BigDecimal.ZERO;
+        this.currency = Currency.USD; // Default currency
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -42,6 +47,12 @@ public class Account {
     public Account(String accountNumber) {
         this();
         this.accountNumber = accountNumber;
+    }
+
+    public Account(String accountNumber, Currency currency) {
+        this();
+        this.accountNumber = accountNumber;
+        this.currency = currency;
     }
 
     // Getters and setters
@@ -67,6 +78,15 @@ public class Account {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
         this.updatedAt = LocalDateTime.now();
     }
 
@@ -114,6 +134,7 @@ public class Account {
                 "id=" + id +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", balance=" + balance +
+                ", currency=" + currency +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

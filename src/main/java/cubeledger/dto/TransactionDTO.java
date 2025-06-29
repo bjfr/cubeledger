@@ -1,5 +1,6 @@
 package cubeledger.dto;
 
+import cubeledger.model.Currency;
 import cubeledger.model.TransactionType;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ public class TransactionDTO {
     private String sourceAccountNumber;
     private String targetAccountNumber;
     private BigDecimal amount;
+    private Currency currency;
     private LocalDateTime timestamp;
     private String description;
     private TransactionType type;
@@ -23,15 +25,23 @@ public class TransactionDTO {
 
     // Constructor with all fields
     public TransactionDTO(Long id, String sourceAccountNumber, String targetAccountNumber,
-                         BigDecimal amount, LocalDateTime timestamp, String description,
+                         BigDecimal amount, Currency currency, LocalDateTime timestamp, String description,
                          TransactionType type) {
         this.id = id;
         this.sourceAccountNumber = sourceAccountNumber;
         this.targetAccountNumber = targetAccountNumber;
         this.amount = amount;
+        this.currency = currency;
         this.timestamp = timestamp;
         this.description = description;
         this.type = type;
+    }
+
+    // Constructor without currency (for backward compatibility)
+    public TransactionDTO(Long id, String sourceAccountNumber, String targetAccountNumber,
+                         BigDecimal amount, LocalDateTime timestamp, String description,
+                         TransactionType type) {
+        this(id, sourceAccountNumber, targetAccountNumber, amount, Currency.USD, timestamp, description, type);
     }
 
     // Getters and setters
@@ -65,6 +75,14 @@ public class TransactionDTO {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     public LocalDateTime getTimestamp() {

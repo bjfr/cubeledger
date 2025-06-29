@@ -1,5 +1,6 @@
 package cubeledger.dto;
 
+import cubeledger.model.Currency;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 public class AccountDTO {
     private String accountNumber;
     private BigDecimal balance;
+    private Currency currency;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -17,11 +19,17 @@ public class AccountDTO {
     }
 
     // Constructor with all fields
-    public AccountDTO(String accountNumber, BigDecimal balance, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public AccountDTO(String accountNumber, BigDecimal balance, Currency currency, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.currency = currency;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    // Constructor without currency (for backward compatibility)
+    public AccountDTO(String accountNumber, BigDecimal balance, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this(accountNumber, balance, Currency.USD, createdAt, updatedAt);
     }
 
     // Getters and setters
@@ -39,6 +47,14 @@ public class AccountDTO {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     public LocalDateTime getCreatedAt() {

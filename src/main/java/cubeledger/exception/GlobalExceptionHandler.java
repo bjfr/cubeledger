@@ -67,6 +67,22 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Handle InvalidCurrencyException.
+     *
+     * @param ex the exception
+     * @return the error response
+     */
+    @ExceptionHandler(InvalidCurrencyException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCurrencyException(InvalidCurrencyException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
      * Handle validation errors.
      *
      * @param ex the exception

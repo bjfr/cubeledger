@@ -117,7 +117,7 @@ public class AccountController {
     public ResponseEntity<AccountDTO> createAccount(
             @Parameter(description = "Account creation request", required = true)
             @Valid @RequestBody CreateAccountRequest request) {
-        Account account = accountService.createAccount(request.getAccountNumber());
+        Account account = accountService.createAccount(request.getAccountNumber(), request.getCurrency());
         AccountDTO accountDTO = convertToDTO(account);
         return ResponseEntity.status(HttpStatus.CREATED).body(accountDTO);
     }
@@ -132,6 +132,7 @@ public class AccountController {
         return new AccountDTO(
                 account.getAccountNumber(),
                 account.getBalance(),
+                account.getCurrency(),
                 account.getCreatedAt(),
                 account.getUpdatedAt()
         );

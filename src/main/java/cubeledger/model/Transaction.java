@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Entity representing a financial transaction in the ledger system.
- * Each transaction records a transfer of funds between accounts.
+ * Each transaction records a transfer of funds between accounts with a specific currency.
  */
 @Entity
 @Table(name = "transactions")
@@ -28,6 +28,10 @@ public class Transaction {
     @Column(nullable = false)
     private BigDecimal amount;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 3)
+    private Currency currency;
+
     @Column(nullable = false)
     private LocalDateTime timestamp;
 
@@ -44,6 +48,7 @@ public class Transaction {
     // Default constructor required by JPA
     public Transaction() {
         this.timestamp = LocalDateTime.now();
+        this.currency = Currency.USD; // Default currency
     }
 
     public Transaction(Account sourceAccount, Account targetAccount, BigDecimal amount, TransactionType type, String description) {
@@ -51,6 +56,18 @@ public class Transaction {
         this.sourceAccount = sourceAccount;
         this.targetAccount = targetAccount;
         this.amount = amount;
+        this.type = type;
+        this.description = description;
+        // Use source account's currency if available, otherwise use default
+        this.currency = (sourceAccount != null) ? sourceAccount.getCurrency() : Currency.USD;
+    }
+
+    public Transaction(Account sourceAccount, Account targetAccount, BigDecimal amount, Currency currency, TransactionType type, String description) {
+        this();
+        this.sourceAccount = sourceAccount;
+        this.targetAccount = targetAccount;
+        this.amount = amount;
+        this.currency = currency;
         this.type = type;
         this.description = description;
     }
@@ -86,6 +103,14 @@ public class Transaction {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     public LocalDateTime getTimestamp() {
@@ -140,6 +165,7 @@ public class Transaction {
                 ", sourceAccount=" + (sourceAccount != null ? sourceAccount.getAccountNumber() : null) +
                 ", targetAccount=" + (targetAccount != null ? targetAccount.getAccountNumber() : null) +
                 ", amount=" + amount +
+                ", currency=" + currency +
                 ", timestamp=" + timestamp +
                 ", description='" + description + '\'' +
                 ", type=" + type +
