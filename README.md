@@ -47,7 +47,7 @@ The application ensures thread safety and proper concurrency control through:
 
 2. **Transaction Isolation**: The application uses the SERIALIZABLE isolation level for financial transactions to ensure consistency.
 
-3. **Optimistic Locking**: The Account and Transaction entities include a version field for optimistic locking, which helps detect concurrent modifications.
+3. **Optimistic Locking**: The Account entity includes a version field for optimistic locking, which helps detect concurrent modifications. The Transaction entity does not use optimistic locking as transactions are typically created once and not updated.
 
 ### Data Consistency
 
@@ -58,6 +58,15 @@ To ensure data consistency:
 3. Transaction records are created for all financial operations.
 4. Validation is performed to ensure that accounts have sufficient funds for withdrawals and transfers.
 
+### Currency Support
+
+The application is designed to support multiple currencies, but currently only Swedish Krona (SEK) is enabled:
+
+1. **Currency Enum**: The application includes a `Currency` enum with support for multiple currencies (SEK, USD, EUR, GBP, etc.).
+2. **Current Limitation**: Only SEK is currently accepted for transactions. Attempts to use other currencies will result in an `InvalidCurrencyException`.
+3. **Future Expansion**: The codebase is structured to easily enable additional currencies in the future by modifying the `validateCurrency` method in `AccountServiceImpl`.
+4. **Currency Validation**: All financial operations validate the currency to ensure consistency.
+
 ### Database Migration
 
 The application uses Flyway for database schema migration and version control:
@@ -65,15 +74,15 @@ The application uses Flyway for database schema migration and version control:
 1. **Schema Versioning**: All database schema changes are versioned and tracked using Flyway migration scripts.
 2. **Automated Migration**: Migrations are automatically applied when the application starts.
 3. **Consistent Schema**: Ensures that the database schema is consistent across all environments.
-4. **Migration Scripts**: Located in `src/main/resources/db/migration` with naming convention `V{version}__{description}.sql`.
-5. **Sample Data**: Includes a migration script for sample data to facilitate testing and development.
+4. **Consolidated Migration**: All schema definitions and sample data are consolidated in a single migration script `V1__init_schema.sql` for simplicity.
+5. **Complete Setup**: The migration script creates all necessary tables, indexes, and inserts sample data to facilitate testing and development.
 
 ### API Documentation
 
 The application uses OpenAPI 3.0 (formerly known as Swagger) for API documentation:
 
-1. **Interactive Documentation**: Access the Swagger UI at `http://localhost:8080/swagger-ui.html` when the application is running.
-2. **API Specification**: The OpenAPI specification is available at `http://localhost:8080/api-docs`.
+1. **Interactive Documentation**: Access the Swagger UI at `http://localhost:8080/swagger-ui/index.html` when the application is running.
+2. **API Specification**: The OpenAPI specification is available at `http://localhost:8080/api-docs/api`.
 3. **Try It Out**: The Swagger UI includes a "Try it out" feature that allows you to test the API endpoints directly from the documentation.
 4. **Detailed Information**: Each endpoint is documented with descriptions, request/response schemas, and possible response codes.
 5. **Customization**: The OpenAPI configuration is customized in the `OpenApiConfig` class and `application.properties`.
@@ -157,7 +166,7 @@ The GitHub Actions workflow configuration is located in `.github/workflows/build
 2. Navigate to the project directory
 3. Run `mvn spring-boot:run`
 4. The application will be available at `http://localhost:8080`
-5. Access the API documentation at `http://localhost:8080/swagger-ui.html`
+5. Access the API documentation at `http://localhost:8080/swagger-ui/index.html`
 6. The OpenAPI specification is available at `http://localhost:8080/api-docs`
 7. Access the Actuator endpoints at `http://localhost:8080/actuator`
 
