@@ -39,7 +39,7 @@ public class Account {
     // Default constructor required by JPA
     public Account() {
         this.balance = BigDecimal.ZERO;
-        this.currency = Currency.USD; // Default currency
+        this.currency = Currency.SEK; // Default currency
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Configuration class for OpenAPI documentation.
  */
-@Configuration
+//@Configuration
 public class OpenApiConfig {
 
     /**
@@ -21,10 +21,10 @@ public class OpenApiConfig {
      *
      * @return the OpenAPI configuration
      */
-    @Bean
+/*    @Bean
     public OpenAPI openAPI() {
         Server localServer = new Server()
-                .url("http://localhost:8080")
+                .url("http://localhost:8080ß")
                 .description("Local Development Server");
 
         Contact contact = new Contact()
@@ -47,5 +47,5 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(info)
                 .servers(List.of(localServer));
-    }
+    }*/
 }

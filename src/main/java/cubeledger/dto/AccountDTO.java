@@ -29,7 +29,7 @@ public class AccountDTO {
 
     // Constructor without currency (for backward compatibility)
     public AccountDTO(String accountNumber, BigDecimal balance, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this(accountNumber, balance, Currency.USD, createdAt, updatedAt);
+        this(accountNumber, balance, Currency.SEK, createdAt, updatedAt);
     }
 
     // Getters and setters

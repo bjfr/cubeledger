@@ -19,7 +19,7 @@ public class WithdrawRequest {
     @DecimalMin(value = "0.01", message = "Amount must be greater than zero")
     private BigDecimal amount;
 
-    private Currency currency = Currency.USD; // Default to USD if not specified
+    private Currency currency = Currency.SEK; // Default to SEK if not specified
 
     private String description;
 
@@ -37,7 +37,7 @@ public class WithdrawRequest {
 
     // Constructor without currency (for backward compatibility)
     public WithdrawRequest(String accountNumber, BigDecimal amount, String description) {
-        this(accountNumber, amount, Currency.USD, description);
+        this(accountNumber, amount, Currency.SEK, description);
     }
 
     // Getters and setters

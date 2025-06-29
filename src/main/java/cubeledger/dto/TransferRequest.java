@@ -22,7 +22,7 @@ public class TransferRequest {
     @DecimalMin(value = "0.01", message = "Amount must be greater than zero")
     private BigDecimal amount;
 
-    private Currency currency = Currency.USD; // Default to USD if not specified
+    private Currency currency = Currency.SEK; // Default to SEK if not specified
 
     private String description;
 
@@ -41,7 +41,7 @@ public class TransferRequest {
 
     // Constructor without currency (for backward compatibility)
     public TransferRequest(String sourceAccountNumber, String targetAccountNumber, BigDecimal amount, String description) {
-        this(sourceAccountNumber, targetAccountNumber, amount, Currency.USD, description);
+        this(sourceAccountNumber, targetAccountNumber, amount, Currency.SEK, description);
     }
 
     // Getters and setters

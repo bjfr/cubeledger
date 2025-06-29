@@ -13,7 +13,7 @@ public class CreateAccountRequest {
     @Pattern(regexp = "^[a-zA-Z0-9-]{3,50}$", message = "Account number must be 3-50 alphanumeric characters or hyphens")
     private String accountNumber;
 
-    private Currency currency = Currency.USD; // Default to USD if not specified
+    private Currency currency = Currency.SEK; // Default to SEK if not specified
 
     // Default constructor
     public CreateAccountRequest() {
@@ -27,7 +27,7 @@ public class CreateAccountRequest {
 
     // Constructor with just account number (for backward compatibility)
     public CreateAccountRequest(String accountNumber) {
-        this(accountNumber, Currency.USD);
+        this(accountNumber, Currency.SEK);
     }
 
     // Getters and setters

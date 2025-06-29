@@ -48,7 +48,7 @@ public class Transaction {
     // Default constructor required by JPA
     public Transaction() {
         this.timestamp = LocalDateTime.now();
-        this.currency = Currency.USD; // Default currency
+        this.currency = Currency.SEK; // Default currency
     }
 
     public Transaction(Account sourceAccount, Account targetAccount, BigDecimal amount, TransactionType type, String description) {
@@ -59,7 +59,7 @@ public class Transaction {
         this.type = type;
         this.description = description;
         // Use source account's currency if available, otherwise use default
-        this.currency = (sourceAccount != null) ? sourceAccount.getCurrency() : Currency.USD;
+        this.currency = (sourceAccount != null) ? sourceAccount.getCurrency() : Currency.SEK;
     }
 
     public Transaction(Account sourceAccount, Account targetAccount, BigDecimal amount, Currency currency, TransactionType type, String description) {

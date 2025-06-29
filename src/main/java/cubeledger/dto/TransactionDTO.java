@@ -41,7 +41,7 @@ public class TransactionDTO {
     public TransactionDTO(Long id, String sourceAccountNumber, String targetAccountNumber,
                          BigDecimal amount, LocalDateTime timestamp, String description,
                          TransactionType type) {
-        this(id, sourceAccountNumber, targetAccountNumber, amount, Currency.USD, timestamp, description, type);
+        this(id, sourceAccountNumber, targetAccountNumber, amount, Currency.SEK, timestamp, description, type);
     }
 
     // Getters and setters
