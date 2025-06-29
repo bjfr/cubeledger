@@ -44,8 +44,6 @@ public class Transaction {
     @Column(nullable = false)
     private TransactionType type;
 
-    @Version
-    private Long version;
 
     // Default constructor required by JPA
     public Transaction() {
@@ -139,13 +137,6 @@ public class Transaction {
         this.type = type;
     }
 
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
 
     @Override
     public boolean equals(Object o) {

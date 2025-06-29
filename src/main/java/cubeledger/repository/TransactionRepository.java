@@ -52,8 +52,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
         "        t1_0.source_account_id,\n" +
         "        t1_0.target_account_id,\n" +
         "        t1_0.timestamp,\n" +
-        "        t1_0.type,\n" +
-        "        t1_0.version \n" +
+        "        t1_0.type \n" +
         "    from\n" +
         "        transactions t1_0 \n" +
         "    left join\n" +
