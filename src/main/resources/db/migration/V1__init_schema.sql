@@ -5,7 +5,8 @@ CREATE TABLE accounts (
     balance DECIMAL(19, 2) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    version BIGINT
+    version BIGINT,
+    currency VARCHAR(3) NOT NULL DEFAULT 'SEK'
 );
 
 -- Create transactions table
@@ -17,7 +18,7 @@ CREATE TABLE transactions (
     timestamp TIMESTAMP NOT NULL,
     description VARCHAR(255),
     type VARCHAR(20) NOT NULL,
-    version BIGINT,
+    currency VARCHAR(3) NOT NULL DEFAULT 'SEK',
     FOREIGN KEY (source_account_id) REFERENCES accounts(id),
     FOREIGN KEY (target_account_id) REFERENCES accounts(id)
 );
@@ -27,3 +28,5 @@ CREATE INDEX idx_transactions_source_account ON transactions(source_account_id);
 CREATE INDEX idx_transactions_target_account ON transactions(target_account_id);
 CREATE INDEX idx_transactions_timestamp ON transactions(timestamp);
 CREATE INDEX idx_accounts_account_number ON accounts(account_number);
+CREATE INDEX idx_accounts_currency ON accounts(currency);
+CREATE INDEX idx_transactions_currency ON transactions(currency);
