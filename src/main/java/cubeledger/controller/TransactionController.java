@@ -213,16 +213,6 @@ public class TransactionController {
             content = @Content
         )
     })
-    @GetMapping("/account/{accountNumber}/paged")
-    public ResponseEntity<Page<TransactionDTO>> listTransactionsPaged(
-            @Parameter(description = "Account number", required = true)
-            @PathVariable String accountNumber,
-            @Parameter(description = "Pagination information (page, size, sort)", required = true)
-            Pageable pageable) {
-        Page<Transaction> transactionsPage = accountService.listTransactions(accountNumber, pageable);
-        Page<TransactionDTO> transactionDTOsPage = transactionsPage.map(this::convertToDTO);
-        return ResponseEntity.ok(transactionDTOsPage);
-    }
 
     /**
      * Convert a Transaction entity to a TransactionDTO.
